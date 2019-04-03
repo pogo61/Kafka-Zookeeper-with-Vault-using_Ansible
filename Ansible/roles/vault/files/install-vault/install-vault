@@ -195,8 +195,8 @@ function install_binaries {
   log_info "Unzipping vault_${version}_linux_amd64.zip"
   unzip -d /tmp "$download_path"
 
-  log_info "Copying Vault binary to $vault_dest_path"
-  sudo cp "/tmp/vault" "$vault_dest_path"
+  log_info "Copying Vault binary to $bin_dir"
+  sudo cp "/tmp/vault" "$bin_dir"
   sudo chown "$username:$username" "$vault_dest_path"
   sudo chmod a+x "$vault_dest_path"
 
@@ -204,20 +204,23 @@ function install_binaries {
   if [[ -f "$symlink_path" ]]; then
     log_info "Symlink $symlink_path already exists. Will not add again."
   else
-    log_info "Adding symlink to $vault_dest_path in $symlink_path"
-    sudo ln -s "$vault_dest_path" "$symlink_path"
+    log_info "Adding symlink to $bin_dir in $symlink_path"
+    sudo ln -s "$bin_dir" "$symlink_path"
   fi
 
-  log_info "Copying Vault run script to $run_vault_dest_path"
-  sudo cp "$SCRIPT_DIR/../run-vault/run-vault" "$run_vault_dest_path"
+  log_info "Copying Vault run script to $bin_dir"
+  sudo cp "/tmp/run-vault/run-vault" "$bin_dir"
   sudo chown "$username:$username" "$run_vault_dest_path"
   sudo chmod a+x "$run_vault_dest_path"
 }
 
 # For more info, see: https://www.vaultproject.io/docs/configuration/#disable_mlock
 function configure_mlock {
-  echo "Giving Vault permission to use the mlock syscall"
-  sudo setcap cap_ipc_lock=+ep $(readlink -f $(which vault))
+  local readonly path="$1"
+  local readonly vault_dest_path="$path/bin/vault"
+
+  echo "Giving Vault permission to use the mlock syscall on $vault_dest_path "
+  sudo setcap cap_ipc_lock=+ep $(readlink -f "$vault_dest_path")
 }
 
 function install {
@@ -265,7 +268,7 @@ function install {
   create_vault_user "$user"
   create_vault_install_paths "$path" "$user"
   install_binaries "$version" "$path" "$user"
-  configure_mlock
+  configure_mlock "$path"
 
   log_info "Vault install complete!"
 }

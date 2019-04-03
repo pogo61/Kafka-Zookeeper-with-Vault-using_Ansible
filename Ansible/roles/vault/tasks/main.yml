@@ -16,7 +16,7 @@
   register: rebooting
 
 - name: Wait for thing to reboot...
-  pause: seconds=45
+  pause: seconds=90
   when: rebooting is changed
 
 - name: install packages
