@@ -5,122 +5,78 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b8e6715-c2b1-44ed-9e67-e08810871d6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/AMIs-list.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/aws_ec2.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/bastion.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/consul.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/kafka.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/kafka_connect.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/management_tools.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/bastion/tasks/build_bastion.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/bastion/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/common/tasks/create_ami.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/common/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/conf_consul.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/install-consul" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/replaceAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/supervisor-initd-script.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/supervisord.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/update_etc_hosts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/run-consul/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/files/run-consul/run-consul" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/tasks/build_consul.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/consul/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka/files/install-kafka.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka/files/install-kafka/conf_kafka.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka/files/install-kafka/kafka_service" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka/files/install-kafka/replaceAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka/files/install-kafka/server.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka/files/install-kafka/update_etc_hosts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/conf_kafka_connect.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/connect-log4j.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/install-kafka_connect.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/kafka-connect-stop.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/kafka_connect_service" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/replaceAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/update_etc_hosts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/files/install-kafka_connect/worker.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/kafka_connect/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/management_tools/files/install-tools/conf_tools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/management_tools/files/install-tools/kafka-manager-docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/management_tools/files/install-tools/replaceAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/management_tools/files/install-tools/update_etc_hosts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/management_tools/files/install-tools/zoonavigator-docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/management_tools/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-consul/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-consul/install-consul" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-consul/supervisor-initd-script.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-consul/supervisord.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-dnsmasq/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-dnsmasq/install-dnsmasq" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/conf_vault.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/install-vault" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/replaceAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/supervisor-initd-script.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/supervisord.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/update_etc_hosts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/run-consul/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/run-consul/run-consul" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/run-vault/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/run-vault/run-vault" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/tls/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/tls/ca.crt.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/tls/vault.crt.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/tls/vault.key.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/update-certificate-store/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/files/update-certificate-store/update-certificate-store" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/vault/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/files/install-zookeeper/conf_zookeeper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/files/install-zookeeper/install-zookeeper.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/files/install-zookeeper/replaceAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/files/install-zookeeper/update_etc_hosts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/files/install-zookeeper/watch_zookeeper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/files/install-zookeeper/zookeeper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/files/install-zookeeper/zookeeper.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/roles/zookeeper/tasks/main.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vars/bastion_vars.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vars/consul_vars.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vars/kafka_connect_vars.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vars/kafka_vars.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vars/management_tools_vars.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vars/vault_vars.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vars/zookeeper_vars.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/vault.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ansible/zookeeper.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/Terraform.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/envs/test/main.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/envs/test/variables.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/consul_ASG/consul_ASG.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/consul_ASG/outputs.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/consul_ASG/user-data-consul.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/consul_ASG/variables.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/kafka_ASG/kafka_ASG.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/kafka_ASG/user-data-kafka.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/kafka_ASG/variables.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/kafka_connect_ASG/kafka_connect_ASG.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/kafka_connect_ASG/user-data-kafka_connect.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/kafka_connect_ASG/variables.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/lounge_transactions_vpc/lounge_transactions_vpc.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/management_ASG/management_ASG.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/management_ASG/user-data-management.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/management_bastion/management_bastion.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/management_vpc/management_vpc.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/tran_to_man_peering/VPC_peer.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/vault_ASG/outputs.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/vault_ASG/user-data-vault.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/vault_ASG/variables.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/vault_ASG/vault_ASG.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Terraform/modules/zookeeper_ASG/zookeeper_ASG.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aws-instances.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/design.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/design.vsdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/consul.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-consul/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-consul/conf_consul.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-consul/install-consul" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-consul/replaceAll.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-consul/supervisor-initd-script.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-consul/supervisord.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-consul/update_etc_hosts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-dnsmasq/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/install-dnsmasq/install-dnsmasq" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/run-consul/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Consul/run-consul/run-consul" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/conf_kafka_connect.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/connect-log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/install-kafka_connect.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/kafka-connect-stop.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/kafka_connect_service" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/replaceAll.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/update_etc_hosts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/install-kafka_connect/worker.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka Connect/kafka_connect.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/install-kafka-part1.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/install-kafka-part2.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/install-kafka/conf_kafka.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/install-kafka/kafka_service" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/install-kafka/replaceAll.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/install-kafka/server.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/install-kafka/update_etc_hosts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/kafka.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Kafka/reboot.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Management Tools/install-tools/conf_tools.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Management Tools/install-tools/install-tools.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Management Tools/install-tools/kafka-manager-docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Management Tools/install-tools/replaceAll.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Management Tools/install-tools/update_etc_hosts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Management Tools/install-tools/zoonavigator-docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Management Tools/management-tools.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Packer.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-consul/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-consul/install-consul" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-consul/supervisor-initd-script.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-consul/supervisord.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-dnsmasq/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-dnsmasq/install-dnsmasq" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-vault/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-vault/conf_vault.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-vault/install-vault" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-vault/replaceAll.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-vault/supervisor-initd-script.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-vault/supervisord.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/install-vault/update_etc_hosts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/run-consul/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/run-consul/run-consul" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/run-vault/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/run-vault/run-vault" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/tls/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/tls/ca.crt.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/tls/vault.crt.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/tls/vault.key.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/update-certificate-store/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/update-certificate-store/update-certificate-store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/vault-consul.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Vault/vault.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/install-zookeeper/conf_zookeeper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/install-zookeeper/install-zookeeper.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/install-zookeeper/replaceAll.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/install-zookeeper/update_etc_hosts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/install-zookeeper/watch_zookeeper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/install-zookeeper/zookeeper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/install-zookeeper/zookeeper.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/Zookeeper/zookeeper.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packer/bastion_base.json" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -138,7 +94,7 @@
         <entry file="file://$PROJECT_DIR$/Ansible/vars/vault_vars.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+              <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -155,8 +111,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/install-vault">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="196" lean-forward="true" selection-start-line="196" selection-end-line="196" />
+            <state relative-caret-position="2940">
+              <caret line="196" selection-start-line="196" selection-end-line="196" />
             </state>
           </provider>
         </entry>
@@ -165,7 +121,7 @@
         <entry file="file://$PROJECT_DIR$/Ansible/roles/vault/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="437">
-              <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+              <caret line="55" column="27" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -174,7 +130,7 @@
         <entry file="file://$PROJECT_DIR$/Ansible/roles/zookeeper/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
-              <caret line="39" column="6" lean-forward="true" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+              <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -269,6 +225,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TF_FMT" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Ansible/roles/vault/tasks" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -310,19 +267,27 @@
       <option name="presentableId" value="Default" />
       <updated>1554025967324</updated>
     </task>
+    <task id="LOCAL-00001" summary="MVP for ansible based instance of existing Kafka/Zookeeper/Vault project">
+      <created>1554319489297</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1554319489298</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="134" y="146" width="1440" height="877" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Messages" sideWeight="0.49928468" visible="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -331,7 +296,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" visible="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Inspection Results" order="10" visible="true" weight="0.3299363" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -371,14 +336,11 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
     </layout-to-restore>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="MVP for ansible based instance of existing Kafka/Zookeeper/Vault project" />
+    <option name="LAST_COMMIT_MESSAGE" value="MVP for ansible based instance of existing Kafka/Zookeeper/Vault project" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Ansible/aws_ec2.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Ansible/roles/common/tasks/create_ami.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -651,14 +613,14 @@
     <entry file="file://$PROJECT_DIR$/Ansible/roles/zookeeper/tasks/main.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
-          <caret line="39" column="6" lean-forward="true" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Ansible/vars/vault_vars.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -679,14 +641,21 @@
     <entry file="file://$PROJECT_DIR$/Ansible/roles/vault/tasks/main.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
-          <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+          <caret line="55" column="27" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ansible/roles/consul/files/install-consul/conf_consul.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/install-vault">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="196" lean-forward="true" selection-start-line="196" selection-end-line="196" />
+        <state relative-caret-position="2940">
+          <caret line="196" selection-start-line="196" selection-end-line="196" />
         </state>
       </provider>
     </entry>
