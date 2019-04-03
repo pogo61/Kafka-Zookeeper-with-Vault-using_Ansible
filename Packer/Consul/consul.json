@@ -1,0 +1,104 @@
+{
+  "min_packer_version": "0.12.0",
+  "variables": {
+    "aws_region": "eu-west-1",
+    "consul_module_version": "v0.0.2",
+    "consul_version": "1.0.2"
+  },
+  "builders": [{
+    "ami_name": "consul-RHEL-linux-74-{{isotime | clean_ami_name}}",
+    "ami_description": "Red Hat Enterprise Linux 7.4 AMI that has Vault and Consul installed.",
+    "instance_type": "t2.micro",
+    "region": "{{user `aws_region`}}",
+    "type": "amazon-ebs",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "architecture": "x86_64",
+        "name": "RHEL-7.4_HVM_GA*",
+        "root-device-type": "ebs"
+      },
+      "owners": ["309956199498"],
+      "most_recent": true
+    },
+    "associate_public_ip_address": "true",
+    "vpc_id": "vpc-44f9c823",
+    "subnet_id":  "subnet-a2ebccc5",
+    "ssh_username": "ec2-user"
+  }],
+  "provisioners": [{
+    "type": "file",
+    "source": "{{template_dir}}/install-consul",
+    "destination": "/tmp",
+    "pause_before": "10s"
+  },{
+    "type": "file",
+    "source": "{{template_dir}}/run-consul",
+    "destination": "/tmp",
+    "pause_before": "10s"
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo yum -y install unzip",
+      "curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip",
+      "unzip awscli-bundle.zip",
+      "./awscli-bundle/install -b ~/bin/aws"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm",
+      "sudo yum update -y",
+      "sudo yum install -y jq"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo yum -y install wget",
+      "wget https://rpmfind.net/linux/centos/6.9/os/x86_64/Packages/busybox-1.15.1-21.el6_6.x86_64.rpm",
+      "sudo yum -y localinstall busybox-1.15.1-21.el6_6.x86_64.rpm"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo easy_install pip"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo pip install boto3",
+      "sudo pip install botocore",
+      "sudo pip install kazoo",
+      "sudo pip install paramiko"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "mkdir ~/.aws",
+      "echo \"[paul]\naws_access_key_id=<Access key for user allowed to assume role defined in Terraform>\naws_secret_access_key=<Secret key for user allowed to assume role defined in Terraform>\n\n[default]\naws_access_key_id=<Access key for user allowed to assume role defined in Terraform>\naws_secret_access_key=<Secret key for user allowed to assume role defined in Terraform>\" | sudo tee --append ~/.aws/credentials",
+      "echo \"[default]\nregion=eu-west-1\n\n[profile terraform]\nrole_arn=<ARN for role defined in Terraform>\nsource_profile=paul\nregion=eu-west-1\" | sudo tee --append ~/.aws/config"
+    ]
+  },{
+    "type": "file",
+    "source": "{{template_dir}}/install-consul",
+    "destination": "/tmp",
+    "pause_before": "10s"
+  },{
+    "type": "shell",
+    "inline": [
+      "chmod +x /tmp/install-consul/conf_consul.py",
+      "chmod +x /tmp/install-consul/update_etc_hosts.py",
+      "chmod +x /tmp/install-consul/replaceAll.py"
+    ]
+  },{
+    "type": "file",
+    "source": "{{template_dir}}/run-consul",
+    "destination": "/tmp",
+    "pause_before": "10s"
+  },{
+    "type": "shell",
+    "inline": [
+      "/tmp/install-consul/install-consul --version {{user `consul_version`}} --user ec2-user"
+    ]
+  }]
+}

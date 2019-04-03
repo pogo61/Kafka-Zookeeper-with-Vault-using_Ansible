@@ -1,0 +1,10 @@
+{
+  "pem_file_location" : "path to where you have your .pem file",
+  "pem_file" : "name of the .pem file",
+  "aws_account_id" : "root account id",
+  "arn_for_terraform_iam_role" : "arn for the iam role to be used by Terraform",
+  "aws_access_key" : "access key for ssh user",
+  "aws_secret_key" : "secrey key for ssh user",
+  "s3_state_bucket_name" : "name for the terraform start bucket",
+  "access_key_pair" : "genned ker pair needed for the instance user of the servers"
+}
