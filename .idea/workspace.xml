@@ -11,6 +11,10 @@
     <ignored path="example-file.json" />
     <ignored path="Kafka-Zookeeper-with-Vault-using_Ansible.iml" />
     <ignored path="Ansible/variables.yml" />
+    <ignored path="Ansible/kafka_connect.retry" />
+    <ignored path="Ansible/vault.retry" />
+    <ignored path="Ansible/kafka.retry" />
+    <ignored mask="*.retry" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +47,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/install-vault">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2940">
+            <state relative-caret-position="2732">
               <caret line="196" selection-start-line="196" selection-end-line="196" />
             </state>
           </provider>
@@ -206,13 +210,20 @@
       <option name="project" value="LOCAL" />
       <updated>1554319489298</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ignore files">
+      <created>1554321058913</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1554321058913</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="134" y="146" width="1440" height="877" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -228,7 +239,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" visible="true" weight="0.3299363" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" visible="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Inspection Results" order="10" visible="true" weight="0.3299363" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -270,7 +281,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="MVP for ansible based instance of existing Kafka/Zookeeper/Vault project" />
-    <option name="LAST_COMMIT_MESSAGE" value="MVP for ansible based instance of existing Kafka/Zookeeper/Vault project" />
+    <MESSAGE value="ignore files" />
+    <option name="LAST_COMMIT_MESSAGE" value="ignore files" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Ansible/roles/common/tasks/create_ami.yml">
@@ -586,7 +598,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Ansible/roles/vault/files/install-vault/install-vault">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2940">
+        <state relative-caret-position="2732">
           <caret line="196" selection-start-line="196" selection-end-line="196" />
         </state>
       </provider>
