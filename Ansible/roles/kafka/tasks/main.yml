@@ -1,0 +1,81 @@
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: Check for reboot hint.
+  shell: LAST_KERNEL=$(rpm -q --last kernel | awk 'NR==1{sub(/kernel-/,""); print $1}'); CURRENT_KERNEL=$(uname -r); if [ $LAST_KERNEL != $CURRENT_KERNEL ]; then echo 'reboot'; else echo 'no'; fi
+  ignore_errors: true
+  register: reboot_hint
+
+- name: Rebooting ...
+  command: shutdown -r now "Reboot required for updated kernel"
+  async: 0
+  poll: 0
+  sudo: true
+  ignore_errors: true
+  when: reboot_hint.stdout.find("reboot") != -1
+  register: rebooting
+
+- name: Wait for thing to reboot...
+  pause: seconds=45
+  when: rebooting is changed
+
+- name: install unzip
+  yum:
+    name:
+     - "unzip"
+     - "wget"
+     - "ca-certificates"
+     - "zip"
+     - "net-tools"
+     - "tar"
+     - "nmap-ncat"
+    state: present
+
+- name: install Java 8
+  yum:
+    name: "java-1.8.0-openjdk"
+    state: present
+
+- name: pip install python dependencies
+  pip:
+    name:
+      - "boto3"
+      - "botocore"
+      - "kazoo"
+      - "paramiko"
+    state: present
+
+- name: create the ip table for the /etc/hosts copy
+  set_fact:
+      hosts:
+        zookeeper1: '0.0.0.0 zookeeper1'
+        zookeeper2: '0.0.0.0 zookeeper2'
+        zookeeper3: '0.0.0.0 zookeeper3'
+        kafka1: '0.0.0.0 kafka1'
+        kafka2: '0.0.0.0 kafka2'
+        kafka3: '0.0.0.0 kafka3'
+
+- name: Print the ip table names to the console.
+  debug: var=hosts
+
+- name: Set up the /etc/hosts file
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ hosts[item] }}"
+    state: present
+  with_items: "{{ hosts }}"
+
+- name: move the kafka installation scripts dir to the /tmp dir
+  copy:
+    src: ../files/install-kafka
+    dest: /tmp
+    mode: u=rwx,g=rx,o=rx
+
+- name: move the kafka installation script to the /tmp dir
+  copy:
+    src: ../files/install-kafka.sh
+    dest: /tmp
+    mode: u=rwx,g=rx,o=rx
+
+- name: install kafka using the copied bash and python scripts
+  shell: /tmp/install-kafka.sh
