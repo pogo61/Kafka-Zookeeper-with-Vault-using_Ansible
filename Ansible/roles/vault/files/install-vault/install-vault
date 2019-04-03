@@ -200,7 +200,7 @@ function install_binaries {
   sudo chown "$username:$username" "$vault_dest_path"
   sudo chmod a+x "$vault_dest_path"
 
-  local readonly symlink_path="$SYSTEM_BIN_DIR/vault"
+  local readonly symlink_path="$SYSTEM_BIN_DIR"
   if [[ -f "$symlink_path" ]]; then
     log_info "Symlink $symlink_path already exists. Will not add again."
   else

@@ -59,6 +59,8 @@
 
 - name: install vault using the copied bash and python scripts
   shell: /tmp/install-vault/install-vault --version {{ vault_version }} --user ec2-user
+  become: true
+  become_user: root
 
 - name: move the vault certs dir to the /opt/vault dir
   copy:
@@ -73,6 +75,8 @@
 
 - name: install the certs into OS trust store
   shell: /tmp/update-certificate-store/update-certificate-store --cert-file-path /opt/vault/tls/ca.crt.pem
+  become: true
+  become_user: root
 
 - name: move the consul installation scripts dir to the /tmp dir
   copy:
@@ -94,6 +98,10 @@
 
 - name: install consul using the copied bash and python scripts
   shell: /tmp/install-consul/install-consul --version {{ consul_version }} --user ec2-user
+  become: true
+  become_user: root
 
 - name: install dnsmasq using the copied bash and python scripts
   shell: /tmp/install-dnsmasq/install-dnsmasq
+  become: true
+  become_user: root
