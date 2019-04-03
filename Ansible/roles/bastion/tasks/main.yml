@@ -1,3 +1,0 @@
-# roles/bastion/tasks/main.yml
-- name: build the bastion instance
-  import_tasks: build_bastion.yml

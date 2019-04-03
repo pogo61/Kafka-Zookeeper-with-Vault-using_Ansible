@@ -1,6 +1,0 @@
----
-image_id: 'ami-08935252a36e25f85'
-region_id: eu-west-1
-vpc_subnet_id: subnet-05d85e7e576855499
-ami_name: 'Kafka Connect Node'
-aws_key: 'aws_dev'
