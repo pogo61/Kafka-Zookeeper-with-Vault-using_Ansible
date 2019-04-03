@@ -1,0 +1,8 @@
+---
+image_id: 'ami-08935252a36e25f85'
+region_id: eu-west-1
+vpc_subnet_id: subnet-05d85e7e576855499
+ami_name: 'Vault Node'
+vault_version: '0.9.0'
+consul_version: '1.4.4'
+aws_key: 'aws_dev'
