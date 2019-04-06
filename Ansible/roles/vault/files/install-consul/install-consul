@@ -244,7 +244,7 @@ function install {
 
   log_info "Starting Consul install"
 
-  install_dependencies
+  #install_dependencies
   create_consul_user "$user"
   create_consul_install_paths "$path" "$user"
   install_binaries "$version" "$path" "$user"

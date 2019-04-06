@@ -80,10 +80,12 @@ function install_dnsmasq {
   log_info "Installing Dnsmasq"
 
   if $(has_apt_get); then
-    sudo apt-get update -y
+    log_info "Using apt-get"
+    #sudo apt-get update -y
     sudo apt-get install -y dnsmasq
   elif $(has_yum); then
-    sudo yum update -y
+    log_info "Using apt-get"
+    #sudo yum update -y
     sudo yum install -y dnsmasq
     echo "prepend domain-name-servers $consul_ip;" | sudo tee -a "/etc/dhcp/dhclient.conf" > /dev/null
     echo "conf-dir=$DNS_MASQ_CONFIG_DIR" | sudo tee -a "/etc/dnsmasq.conf" > /dev/null
