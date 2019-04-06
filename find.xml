@@ -1,7 +1,0 @@
-<application>
-  <component name="FindSettings">
-    <option name="customScope" value="File '.../Packer/Consul/install-consul/conf_consul.py [Kafka-Zookeeper-with-Vault-using_Ansible]'" />
-    <option name="defaultScopeName" value="File '.../Packer/Consul/install-consul/conf_consul.py [Kafka-Zookeeper-with-Vault-using_Ansible]'" />
-    <option name="SEARCH_SCOPE" value="File '.../Packer/Consul/install-consul/conf_consul.py [Kafka-Zookeeper-with-Vault-using_Ansible]'" />
-  </component>
-</application>
