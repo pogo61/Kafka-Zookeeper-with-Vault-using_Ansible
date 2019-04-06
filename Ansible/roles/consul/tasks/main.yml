@@ -1,0 +1,3 @@
+# roles/consul/tasks/main.yml
+- name: build the bastion instance
+  import_tasks: build_consul.yml
