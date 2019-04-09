@@ -29,6 +29,7 @@
      - "net-tools"
      - "tar"
      - "nmap-ncat"
+     - "curl"
     state: present
 
 - name: install Java 8
@@ -69,9 +70,19 @@
 
 - name: change ownership of the certs
   shell: chown ec2-user:ec2-user /opt/vault/tls/*
+  args:
+    warn: false # set warn=false to prevent warning
 
 - name: change permission of the certs
   shell: chmod 600 /opt/vault/tls/*
+  args:
+    warn: false # set warn=false to prevent warning
+
+- name: move the update-certificate-store dir to the /tmp dir
+  copy:
+    src: ../files/update-certificate-store
+    dest: /tmp
+    mode: u=rwx,g=rx,o=rx
 
 - name: install the certs into OS trust store
   shell: /tmp/update-certificate-store/update-certificate-store --cert-file-path /opt/vault/tls/ca.crt.pem
