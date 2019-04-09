@@ -5,6 +5,7 @@
       <mapping pattern="run-vault" type="Bash" />
       <mapping pattern="zookeeper" type="Bash" />
       <mapping pattern=".design.vsdx.icloud" type="PLAIN_TEXT" />
+      <mapping pattern="run-consul-copy" type="PLAIN_TEXT" />
       <mapping pattern="my_file_377" type="PLAIN_TEXT" />
       <mapping pattern="Vagrantfile" type="PLAIN_TEXT" />
       <mapping ext="pem" type="PLAIN_TEXT" />
