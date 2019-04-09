@@ -9,6 +9,7 @@
       <mapping pattern="run-consul-copy" type="PLAIN_TEXT" />
       <mapping pattern="my_file_377" type="PLAIN_TEXT" />
       <mapping pattern="Vagrantfile" type="PLAIN_TEXT" />
+      <mapping ext="tvars" type="PLAIN_TEXT" />
       <mapping ext="pem" type="PLAIN_TEXT" />
       <mapping pattern="mai" type="Terraform" />
       <mapping pattern=".zookeeper_ASG.tf.icloud" type="Terraform" />
