@@ -95,3 +95,4 @@ variable "root_volume_delete_on_termination" {
   description = "Whether the volume should be destroyed on instance termination."
   default     = true
 }
+variable 'account' { default = '095955279155' description = 'AWS account ID' }

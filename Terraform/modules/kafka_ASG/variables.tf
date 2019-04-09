@@ -21,3 +21,4 @@ variable "kafka_ebs_vol_type" {
 
 variable "ready" {
 }
+

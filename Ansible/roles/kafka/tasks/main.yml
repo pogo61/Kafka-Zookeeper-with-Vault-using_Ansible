@@ -47,13 +47,13 @@
 
 - name: create the ip table for the /etc/hosts copy
   set_fact:
-      hosts:
-        zookeeper1: '0.0.0.0 zookeeper1'
-        zookeeper2: '0.0.0.0 zookeeper2'
-        zookeeper3: '0.0.0.0 zookeeper3'
-        kafka1: '0.0.0.0 kafka1'
-        kafka2: '0.0.0.0 kafka2'
-        kafka3: '0.0.0.0 kafka3'
+    hosts:
+      zookeeper1: '0.0.0.0 zookeeper1'
+      zookeeper2: '0.0.0.0 zookeeper2'
+      zookeeper3: '0.0.0.0 zookeeper3'
+      kafka1: '0.0.0.0 kafka1'
+      kafka2: '0.0.0.0 kafka2'
+      kafka3: '0.0.0.0 kafka3'
 
 - name: Print the ip table names to the console.
   debug: var=hosts

@@ -1,6 +1,4 @@
 # roles/bastion/tasks/main.yml
-- include_vars: variables.yml
-
 - name: create a base instance on which to base the AMI on
   ec2:
     region: "{{ region_id }}"

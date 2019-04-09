@@ -20,7 +20,7 @@ variable "bastion_cidr_blocks" {
 // key generated from your predefined user allowed to assume the IAN role defined in main.tf - see ssh-keygen -y on https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws
 resource "aws_key_pair" "admin" {
   key_name    = "admin-key"
-  public_key   = "<key pair for instance access>"
+  public_key   = "${var.admin-key}"
 }
 
 resource "aws_security_group" "bastion_sg" {
@@ -58,14 +58,15 @@ data "aws_ami" "management_bastion_node" {
 
   filter {
     name   = "name"
-    values = ["bastion-RHEL-linux-74*"]
+    values = ["Bastion Host"]
   }
 
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-  owners = ["<your account ID>"] # my account
+
+  owners = ["${var.account}"] # my account
 
 }
 

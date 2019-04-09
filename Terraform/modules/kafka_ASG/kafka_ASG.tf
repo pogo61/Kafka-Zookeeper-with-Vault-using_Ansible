@@ -3,49 +3,17 @@ data "aws_ami" "kafka_node" {
 
   filter {
     name   = "name"
-    values = ["kafka-RHEL-linux-74*"]
+    values = ["Kafka Node"]
   }
 
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-  owners = ["<your account ID>"] # my account
+
+  owners = ["${var.account}"] # my account
 
 }
-
-/*resource "aws_s3_bucket" "kafka_bucket" {
-  bucket = "kafka-bucket-pp"
-  acl    = "bucket-owner-full-control"
-  force_destroy = true
-
-  tags {
-    Name        = "kafka-bucket"
-  }
-}
-
-resource "aws_s3_bucket_policy" "kafka_bucket_policy" {
-  bucket = "${aws_s3_bucket.kafka_bucket.id}"
-  policy = <<POLICY
-{
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "AllowList",
-        "Effect": "Allow",
-        "Principal": {
-          "AWS": "arn:aws:iam::095955279155:role/Terraform"
-        },
-        "Action": "s3:*",
-        "Resource": [
-            "arn:aws:s3:::kafka-bucket-pp",
-            "arn:aws:s3:::kafka-bucket-pp*//*"
-        ]
-      }
-    ]
-  }
-  POLICY
-}*/
 
 resource "aws_dynamodb_table" "kafka-state-table" {
   name           = "kafka-state"
@@ -84,15 +52,6 @@ resource "aws_launch_configuration" "kafka_ASG_launch" {
   }
 
   user_data = "${data.template_file.user_data_kafka_cluster.rendered}"
-//  user_data = <<-EOF
-//      #!/bin/bash -ex
-//      exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
-//      echo BEGIN
-//      # wait for the zookeeper cluster to complete setup
-//      sleep 30
-//      su ec2-user -c 'source ~/.bash_profile; python /tmp/install-kafka/conf_kafka.py'
-//      echo END
-//      EOF
 }
 
 resource "aws_autoscaling_group" "kafka_ASG" {

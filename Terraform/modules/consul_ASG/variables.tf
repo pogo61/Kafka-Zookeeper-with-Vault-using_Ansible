@@ -51,3 +51,4 @@ locals {
   cluster_name = "aws:autoscaling:groupName"
   cluster_value = "consul_ASG"
 }
+variable 'account' { default = '095955279155' description = 'AWS account ID' }

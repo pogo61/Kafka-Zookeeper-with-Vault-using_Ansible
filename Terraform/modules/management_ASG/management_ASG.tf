@@ -29,7 +29,7 @@ data "aws_ami" "management_node" {
 
   filter {
     name   = "name"
-    values = ["Management-Amazon Linux AMI*"]
+    values = ["Management Tools Node*"]
   }
 
   filter {
@@ -37,7 +37,7 @@ data "aws_ami" "management_node" {
     values = ["hvm"]
   }
 
-  owners = ["<your account ID>"] # my account
+  owners = ["${var.account}"] # my account
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ data "aws_ami" "kafka_connect_node" {
 
   filter {
     name   = "name"
-    values = ["kafka_connect-RHEL-linux-74*"]
+    values = ["Kafka Connect Node"]
 //    values = ["Kafka_Connect-Amazon Linux AMI*"]
   }
 
@@ -27,7 +27,8 @@ data "aws_ami" "kafka_connect_node" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-  owners = ["<your account ID>"] # my account
+
+  owners = ["${var.account}"] # my account
 
 }
 
