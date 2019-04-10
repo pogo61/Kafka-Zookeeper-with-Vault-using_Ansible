@@ -7,11 +7,11 @@
     - name: copy account to ../Terraform/envs/modules/zookeeper_ASG/variables.tf
       lineinfile:
         dest: ../Terraform/modules/zookeeper_ASG/variables.tf
-        line: "variable 'account' { default = '{{ aws_account_id }}' description = 'AWS account ID' }"
+        line: "variable \"account\" { default = \"{{ aws_account_id }}\" description = \"AWS account ID\" }"
         state: present
-    - name: insert .pem file into ./roles/consul/files/install-consul/conf_consul.py
+    - name: insert .pem file into ./roles/zookeeper/files/install-zookeeper/conf_zookeeper.py
       replace:
-        path: ./roles/consul/files/install-zookeeper/conf_zookeeper.py
+        path: ./roles/zookeeper/files/install-zookeeper/conf_zookeeper.py
         regexp: '(\<your .pem file\>)'
         replace: '{{ pem_file }}'
     - name: move the .pem file ./roles/zookeeper/files/install-zookeeper dir
@@ -24,7 +24,7 @@
         name: common
     - meta: refresh_inventory
 
-- hosts: Kafka_Node
+- hosts: Zookeeper_Node
   become: yes
   remote_user: ec2-user
   vars_files:

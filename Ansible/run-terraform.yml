@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+  - name: initialise and run Terraform
+    terraform:
+      project_path: '../Terraform/envs/test'
+      variables_file: './credentials.tvars'
+      state: present
+      force_init: true

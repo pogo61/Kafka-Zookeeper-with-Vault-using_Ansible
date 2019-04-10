@@ -1,7 +1,6 @@
 - hosts: localhost
   remote_user: root
   vars_files:
-    - vars/consol_vars.yml
     - variables.yml
   tasks:
     - name: copy account to ../Terraform/envs/test/main.tf
@@ -10,10 +9,10 @@
         regexp: '(\<your account ID\>)'
         replace: '{{ aws_account_id }}'
     - name: copy Terraform IAM ARN to ../Terraform/envs/test/main.tf
-        replace:
-          path: ../Terraform/envs/test/main.tf
-          regexp: '(\<ARN for IAM Role predefined to allow Terraform to create everything\>)'
-          replace: '{{ arn_for_terraform_iam_role }}'
+      replace:
+        path: ../Terraform/envs/test/main.tf
+        regexp: '(\<ARN for IAM Role predefined to allow Terraform to create everything\>)'
+        replace: '{{ arn_for_terraform_iam_role }}'
     - name: copy Terraform S3 backet name to ../Terraform/envs/test/main.tf
       replace:
         path: ../Terraform/envs/test/main.tf

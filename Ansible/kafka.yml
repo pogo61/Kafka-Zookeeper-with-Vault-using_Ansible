@@ -7,7 +7,7 @@
     - name: copy account to ../Terraform/modules/kafka_ASG/variables.tf
       lineinfile:
         dest: ../Terraform/modules/kafka_ASG/variables.tf
-        line: "variable 'account' { default = '{{ aws_account_id }}' description = 'AWS account ID' }"
+        line: "variable \"account\" { default = \"{{ aws_account_id }}\" description = \"AWS account ID\" }"
         state: present
     - name: insert .pem file into ./roles/kafka/files/install-kafka/conf_kafka.py
       replace:

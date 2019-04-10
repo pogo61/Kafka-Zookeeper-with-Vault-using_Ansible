@@ -19,7 +19,7 @@ set -x
 # sudo chmod +x ./store_ip.sh
 set +x
 # download Zookeeper and Kafka. Recommended is latest Kafka (0.10.2.1) and Scala 2.12
-wwget https://archive.apache.org/dist/kafka/0.11.0.2/kafka_2.12-0.11.0.2.tgz
+wget https://archive.apache.org/dist/kafka/0.11.0.2/kafka_2.12-0.11.0.2.tgz
 tar -xvzf kafka_2.12-0.11.0.2.tgz
 rm kafka_2.12-0.11.0.2.tgz
 sudo mkdir -p /opt/zookeeper

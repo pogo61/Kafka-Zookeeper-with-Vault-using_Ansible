@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+  - name: shutdown instances and remove everything
+    terraform:
+      project_path: '../Terraform/envs/test'
+      variables_file: './credentials.tvars'
+      state: absent
+      backend_config:
+        region: "eu-west-1"
+        bucket: "pp-terraform-status"
+        key: "terraform.tfstate"
