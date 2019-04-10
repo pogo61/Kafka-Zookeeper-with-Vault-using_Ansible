@@ -29,6 +29,7 @@
   remote_user: ec2-user
   vars_files:
     - vars/management_tools_vars.yml
+    - variables.yml
   roles:
     - role: management_tools
 

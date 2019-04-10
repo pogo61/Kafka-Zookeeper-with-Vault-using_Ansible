@@ -26,11 +26,12 @@
         name: common
     - meta: refresh_inventory
 
-- hosts: bastion_host
+- hosts: Bastion_Host
   become: yes
   remote_user: ec2-user
   vars_files:
     - vars/bastion_vars.yml
+    - variables.yml
   roles:
     - role: bastion
 

@@ -19,6 +19,17 @@
   pause: seconds=90
   when: rebooting is changed
 
+- name: setup aws credentials dir for python
+  shell: mkdir ~/.aws
+  args:
+    warn: false # set warn=false to prevent warning
+
+- name: setup aws credentials user for python
+  shell:  echo \"[paul]\naws_access_key_id={{ aws_access_key }}\\naws_secret_access_key={{ aws_secret_key }}\\n\\n[default]\\naws_access_key_id={{ aws_key }}\\naws_secret_access_key={{ aws_secret_key }}\" | sudo tee --append ~/.aws/credentials
+
+- name: setup aws credentials IAM role for python
+  shell: echo \"[default]\nregion=eu-west-1\n\n[profile terraform]\nrole_arn={{ arn_for_terraform_iam_role }}\nsource_profile=paul\nregion={{ region_id }}\" | sudo tee --append ~/.aws/config
+
 - name: install packages
   yum:
     name:

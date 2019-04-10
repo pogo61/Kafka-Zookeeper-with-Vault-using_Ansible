@@ -39,6 +39,7 @@
   remote_user: ec2-user
   vars_files:
     - vars/vault_vars.yml
+    - variables.yml
   roles:
     - role: vault
 
