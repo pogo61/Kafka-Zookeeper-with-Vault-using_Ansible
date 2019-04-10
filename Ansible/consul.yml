@@ -34,7 +34,7 @@
         name: common
     - meta: refresh_inventory
 
-- hosts: Console_Node
+- hosts: Consul_Node
   become: yes
   remote_user: ec2-user
   vars_files:
