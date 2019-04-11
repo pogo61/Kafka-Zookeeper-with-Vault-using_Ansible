@@ -25,11 +25,50 @@
   args:
     warn: false # set warn=false to prevent warning
 
+- name: create ~/.aws/config
+  copy:
+    content: ""
+    dest: ~/.aws/config
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
+- name: create ~/.aws/credentials
+  copy:
+    content: ""
+    dest: ~/.aws/credentials
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
 - name: setup aws credentials user for python
-  shell:  echo \"[paul]\naws_access_key_id={{ aws_access_key }}\\naws_secret_access_key={{ aws_secret_key }}\\n\\n[default]\\naws_access_key_id={{ aws_key }}\\naws_secret_access_key={{ aws_secret_key }}\" | sudo tee --append ~/.aws/credentials
+  lineinfile:
+    dest: ~/.aws/credentials
+    line: '{{ item }}'
+  with_items:
+    - '[paul]'
+    - 'aws_access_key_id={{ aws_access_key }}'
+    - 'aws_secret_access_key={{ aws_secret_key }}'
+    - '[default]'
+    - 'aws_access_key_id={{ aws_key }}'
+  become: true
+  become_user: ec2-user
 
 - name: setup aws credentials IAM role for python
-  shell: echo \"[default]\nregion=eu-west-1\n\n[profile terraform]\nrole_arn={{ arn_for_terraform_iam_role }}\nsource_profile=paul\nregion={{ region_id }}\" | sudo tee --append ~/.aws/config
+  lineinfile:
+    dest: ~/.aws/config
+    line: '{{ item }}'
+  with_items:
+    - '[default]'
+    - 'region={{ region_id }}'
+    - '[profile terraform]'
+    - 'role_arn={{ arn_for_terraform_iam_role }}'
+    - 'source_profile=paul'
+    - 'region={{ region_id }}'
+  become: true
+  become_user: ec2-user
 
 - name: install unzip
   yum:
