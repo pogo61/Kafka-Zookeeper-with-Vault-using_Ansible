@@ -23,3 +23,13 @@
         path: ../Terraform/envs/test/variables.tf
         regexp: '(\<ARN for IAM Role predefined to allow Terraform to create everything\>)'
         replace: '{{ arn_for_terraform_iam_role }}'
+    - name: copy AWS access_key to  ../Terraform/envs/test/variables.tf
+      replace:
+        path: ../Terraform/envs/test/variables.tf
+        regexp: '(\<aws_access_key\>)'
+        replace: '{{ aws_access_key }}'
+    - name: copy AWS secret_key to  ../Terraform/envs/test/variables.tf
+      replace:
+        path: ../Terraform/envs/test/variables.tf
+        regexp: '(\<aws_secret_key\>)'
+        replace: '{{ aws_secret_key }}'

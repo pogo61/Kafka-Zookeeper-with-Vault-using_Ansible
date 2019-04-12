@@ -23,6 +23,8 @@
   shell: mkdir ~/.aws
   args:
     warn: false # set warn=false to prevent warning
+  become: true
+  become_user: ec2-user
 
 - name: create ~/.aws/config
   copy:

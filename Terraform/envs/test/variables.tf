@@ -1,10 +1,10 @@
 variable "access_key" {
-  default = "missing"
+  default = "<aws_access_key>"
   description = "The AWS user access key"
 }
 
 variable "secret_key" {
-  default = "missing"
+  default = "<aws_secret_key>"
   description = "The AWS user secret key"
 }
 
