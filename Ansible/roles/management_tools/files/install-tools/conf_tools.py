@@ -199,11 +199,6 @@ def changeTagName(tag, ip, state, list, maxinstances, region):
 
 if __name__ == "__main__":
 
-    # initialise needed variables
-    session = boto3.Session(profile_name='terraform')
-    client = session.client('dynamodb')
-    tablename = 'management-state'
-
 
     # get the AWS values needed to lookup the relevant state and ASG data
     valueList = getAWSValues()
@@ -214,6 +209,11 @@ if __name__ == "__main__":
     zkmaxInstances = valueList[4]
     instanceList = valueList[5]
     region = valueList[6]
+
+    # initialise needed variables
+    session = boto3.Session(profile_name='terraform', region_name=region)
+    client = session.client('dynamodb')
+    tablename = 'management-state'
 
     # get the current details from the DynamoDB table
     # data = getStateFile(table, kmaxInstances)

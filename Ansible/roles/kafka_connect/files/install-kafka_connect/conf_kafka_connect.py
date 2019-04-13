@@ -239,12 +239,6 @@ def createLists(kmaxInstances,zkmaxInstances):
 
 if __name__ == "__main__":
 
-    # initialise needed variables
-    session = boto3.Session(profile_name='terraform')
-    client = session.client('dynamodb')
-    tablename = 'kafka_connect-state'
-
-
     # get the AWS values needed to lookup the relevant state and ASG data
     valueList = getAWSValues()
     LOCAL_IP = valueList[0]
@@ -255,6 +249,11 @@ if __name__ == "__main__":
     zkmaxInstances = valueList[5]
     instanceList = valueList[6]
     region = valueList[7]
+
+    # initialise needed variables
+    session = boto3.Session(profile_name='terraform', region_name=region)
+    client = session.client('dynamodb')
+    tablename = 'kafka_connect-state'
 
     # get the current details from the DynamoDB table
     data = getStateFile(client, kcmaxInstances, TAG_VALUE, tablename)

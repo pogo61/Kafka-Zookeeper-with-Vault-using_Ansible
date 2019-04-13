@@ -82,7 +82,7 @@ data "aws_ami" "consul_node" {
 
   filter {
     name   = "name"
-    values = ["Console Node"]
+    values = ["Consul Node"]
   }
 
   filter {

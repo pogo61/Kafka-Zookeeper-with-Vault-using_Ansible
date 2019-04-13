@@ -246,6 +246,15 @@ if __name__ == "__main__":
     instanceList = valueList[5]
     region = valueList[6]
 
+    # initialise needed variables
+    session = boto3.Session(profile_name='terraform', region_name=region)
+    client = session.client('dynamodb')
+    tablename = 'kafka-state'
+    # s3 = session.resource('s3')
+    # filename = 'kafka_ips.json'
+    # path = '/tmp/install-kafka/'
+    # bucket_name = 'kafka-bucket-pp'
+
     # get the current details from the DynamoDB table
     data = getStateFile(client, kmaxInstances, TAG_VALUE, tablename)
 
