@@ -46,30 +46,28 @@
   become_user: ec2-user
 
 - name: setup aws credentials user for python
-  lineinfile:
-    dest: ~/.aws/credentials
-    line: '{{ item }}'
-  with_items:
-    - '[paul]'
-    - 'aws_access_key_id={{ aws_access_key }}'
-    - 'aws_secret_access_key={{ aws_secret_key }}'
-    - '[default]'
-    - 'aws_access_key_id={{ aws_access_key }}'
-    - 'aws_secret_access_key={{ aws_secret_key }}'
+  blockinfile:
+    path: ~/.aws/credentials
+    block: |
+      [paul]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
+      [default]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
   become: true
   become_user: ec2-user
 
 - name: setup aws credentials IAM role for python
-  lineinfile:
-    dest: ~/.aws/config
-    line: '{{ item }}'
-  with_items:
-    - '[default]'
-    - 'region={{ region_id }}'
-    - '[profile terraform]'
-    - 'role_arn={{ arn_for_terraform_iam_role }}'
-    - 'source_profile=paul'
-    - 'region={{ region_id }}'
+  blockinfile:
+    path: ~/.aws/credentials
+      block: |
+        [default]
+        region={{ region_id }}
+        [profile terraform]
+        role_arn={{ arn_for_terraform_iam_role }}
+        source_profile=paul
+        region={{ region_id }}
   become: true
   become_user: ec2-user
 
