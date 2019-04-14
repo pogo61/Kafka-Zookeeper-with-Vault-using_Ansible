@@ -59,14 +59,14 @@
 
 - name: setup aws credentials IAM role for python
   blockinfile:
-    path: ~/.aws/credentials
-      block: |
-        [default]
-        region={{ region_id }}
-        [profile terraform]
-        role_arn={{ arn_for_terraform_iam_role }}
-        source_profile=paul
-        region={{ region_id }}
+    path: ~/.aws/config
+    block: |
+      [default]
+      region={{ region_id }}
+      [profile terraform]
+      role_arn={{ arn_for_terraform_iam_role }}
+      source_profile=paul
+      region={{ region_id }}
   become: true
   become_user: ec2-user
 
