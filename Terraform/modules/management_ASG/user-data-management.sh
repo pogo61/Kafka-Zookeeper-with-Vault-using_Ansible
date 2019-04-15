@@ -7,7 +7,7 @@ max=10
 for (( i=0; i <= $max; ++i ))
 do
 echo "waiting for Kafka - $i"
-if ! su ec2-user -c 'source ~/.bash_profile; nc -vz zookeeper1 2181'; then
+if ! su ec2-user -c 'source ~/.bash_profile; ncat -v zookeeper1 2181'; then
   echo "kafka not ready"
   sleep 30
 else

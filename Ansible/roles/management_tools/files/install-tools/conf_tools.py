@@ -239,7 +239,7 @@ if __name__ == "__main__":
 
     # Update the /etc/hosts file
     # Add hosts entries (mocking DNS) - put relevant IPs here
-    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-tools/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+"\'", shell=True, executable='/bin/bash')
+    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-tools/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+" "+str(region)+"\'", shell=True, executable='/bin/bash')
 
     # update the services.properties file
     node = TAG_VALUE[-1:]

@@ -285,7 +285,7 @@ if __name__ == "__main__":
 
     # Update the /etc/hosts file
     # Add hosts entries (mocking DNS) - put relevant IPs here
-    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-kafka_connect/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+" "+str(kcmaxInstances)+"\'", shell=True, executable='/bin/bash')
+    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-kafka_connect/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+" "+str(kcmaxInstances)+" "+str(region)+"\'", shell=True, executable='/bin/bash')
     subprocess.check_output("sudo python /tmp/install-kafka_connect/replaceAll.py /opt/kafka/config/worker.properties bootstrap.servers=localhost:9092 bootstrap.servers="+kafkaList, shell=True, executable='/bin/bash')
     subprocess.check_output("sudo python /tmp/install-kafka_connect/replaceAll.py /opt/kafka/config/worker.properties rest.advertised.host.name=localhost rest.advertised.host.name="+TAG_VALUE, shell=True, executable='/bin/bash')
     subprocess.check_output("sudo python /tmp/install-kafka_connect/replaceAll.py /opt/kafka/config/worker.properties rest.host.name=localhost rest.host.name="+TAG_VALUE, shell=True, executable='/bin/bash')

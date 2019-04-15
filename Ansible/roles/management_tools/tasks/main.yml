@@ -59,7 +59,7 @@
 
 - name: setup aws credentials IAM role for python
   blockinfile:
-    path: ~/.aws/credentials
+    path: ~/.aws/config
     block: |
       [default]
       region={{ region_id }}
@@ -100,7 +100,7 @@
 - name: give permissions to execute docker
   shell: usermod -aG docker $(whoami)
 
-- name: move the vault run scripts dir to the /tmp dir
+- name: move the tools run scripts dir to the /tmp dir
   copy:
     src: ../files/install-tools
     dest: /tmp
