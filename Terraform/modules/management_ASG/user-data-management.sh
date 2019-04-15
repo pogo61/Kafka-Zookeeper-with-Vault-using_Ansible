@@ -7,12 +7,12 @@ max=10
 for (( i=0; i <= $max; ++i ))
 do
 echo "waiting for Kafka - $i"
-if ! su ec2-user -c 'source ~/.bash_profile; ncat -v zookeeper1 2181'; then
+if ! su ec2-user -c 'source ~/.bash_profile; ncat -vc ls zookeeper1 2181'; then
   echo "kafka not ready"
   sleep 30
 else
-  su ec2-user -c 'source ~/.bash_profile; /usr/local/bin/docker-compose -f /tmp/install-tools/zoonavigator-docker-compose.yml up -d'
-  su ec2-user -c 'source ~/.bash_profile; /usr/local/bin/docker-compose -f /tmp/install-tools/kafka-manager-docker-compose.yml up -d'
+  su ec2-user -c 'source ~/.bash_profile; sudo /usr/local/bin/docker-compose -f /tmp/install-tools/zoonavigator-docker-compose.yml up -d'
+  su ec2-user -c 'source ~/.bash_profile; sudo /usr/local/bin/docker-compose -f /tmp/install-tools/kafka-manager-docker-compose.yml up -d'
   break
 fi
 done
