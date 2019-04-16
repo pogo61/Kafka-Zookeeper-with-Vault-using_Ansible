@@ -239,12 +239,6 @@ def createLists(kmaxInstances,zkmaxInstances):
 
 if __name__ == "__main__":
 
-    # initialise needed variables
-    session = boto3.Session(profile_name='terraform')
-    client = session.client('dynamodb')
-    tablename = 'kafka_connect-state'
-
-
     # get the AWS values needed to lookup the relevant state and ASG data
     valueList = getAWSValues()
     LOCAL_IP = valueList[0]
@@ -255,6 +249,11 @@ if __name__ == "__main__":
     zkmaxInstances = valueList[5]
     instanceList = valueList[6]
     region = valueList[7]
+
+    # initialise needed variables
+    session = boto3.Session(profile_name='terraform', region_name=region)
+    client = session.client('dynamodb')
+    tablename = 'kafka_connect-state'
 
     # get the current details from the DynamoDB table
     data = getStateFile(client, kcmaxInstances, TAG_VALUE, tablename)
@@ -286,7 +285,7 @@ if __name__ == "__main__":
 
     # Update the /etc/hosts file
     # Add hosts entries (mocking DNS) - put relevant IPs here
-    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-kafka_connect/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+" "+str(kcmaxInstances)+"\'", shell=True, executable='/bin/bash')
+    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-kafka_connect/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+" "+str(kcmaxInstances)+" "+str(region)+"\'", shell=True, executable='/bin/bash')
     subprocess.check_output("sudo python /tmp/install-kafka_connect/replaceAll.py /opt/kafka/config/worker.properties bootstrap.servers=localhost:9092 bootstrap.servers="+kafkaList, shell=True, executable='/bin/bash')
     subprocess.check_output("sudo python /tmp/install-kafka_connect/replaceAll.py /opt/kafka/config/worker.properties rest.advertised.host.name=localhost rest.advertised.host.name="+TAG_VALUE, shell=True, executable='/bin/bash')
     subprocess.check_output("sudo python /tmp/install-kafka_connect/replaceAll.py /opt/kafka/config/worker.properties rest.host.name=localhost rest.host.name="+TAG_VALUE, shell=True, executable='/bin/bash')

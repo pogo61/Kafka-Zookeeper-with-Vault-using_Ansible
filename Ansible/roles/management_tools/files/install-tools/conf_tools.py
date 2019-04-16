@@ -69,7 +69,7 @@ def getAWSValues():
             tagName = 'management'
 
 
-    # get the ASG details for kafka and zookeeper
+    # get the ASG details for kafka, zookeeper, and management tools
     asg = boto3.client('autoscaling')
     kAsg = asg.describe_auto_scaling_groups(
         AutoScalingGroupNames=[
@@ -92,7 +92,17 @@ def getAWSValues():
     print('the zookeeper max instnces are: '+str(zkAsg['AutoScalingGroups'][0]['MaxSize']))
     zkmaxinstances = zkAsg['AutoScalingGroups'][0]['MaxSize']
 
-    return [localIp, instanceId, tagName, kmaxinstances, zkmaxinstances, instancelist, region]
+    mAsg = asg.describe_auto_scaling_groups(
+        AutoScalingGroupNames=[
+            'management_ASG',
+        ]
+    )
+    print('the management ASGs are: '+str(mAsg['AutoScalingGroups']))
+    print('the management ASG details are: '+str(mAsg['AutoScalingGroups'][0]['AutoScalingGroupName']))
+    print('the management max instnces are: '+str(mAsg['AutoScalingGroups'][0]['MaxSize']))
+    mmaxinstances = mAsg['AutoScalingGroups'][0]['MaxSize']
+
+    return [localIp, instanceId, tagName, kmaxinstances, zkmaxinstances, mmaxinstances, instancelist, region]
 
 def getStateFile(client, maxinstances, servername, tablename):
     #initialise the default json file
@@ -199,11 +209,6 @@ def changeTagName(tag, ip, state, list, maxinstances, region):
 
 if __name__ == "__main__":
 
-    # initialise needed variables
-    session = boto3.Session(profile_name='terraform')
-    client = session.client('dynamodb')
-    tablename = 'management-state'
-
 
     # get the AWS values needed to lookup the relevant state and ASG data
     valueList = getAWSValues()
@@ -212,8 +217,14 @@ if __name__ == "__main__":
     TAG_VALUE = valueList[2]
     kmaxInstances = valueList[3]
     zkmaxInstances = valueList[4]
-    instanceList = valueList[5]
-    region = valueList[6]
+    mmaxInstances = valueList[5]
+    instanceList = valueList[6]
+    region = valueList[7]
+
+    # initialise needed variables
+    session = boto3.Session(profile_name='terraform', region_name=region)
+    client = session.client('dynamodb')
+    tablename = 'management-state'
 
     # get the current details from the DynamoDB table
     # data = getStateFile(table, kmaxInstances)
@@ -239,7 +250,7 @@ if __name__ == "__main__":
 
     # Update the /etc/hosts file
     # Add hosts entries (mocking DNS) - put relevant IPs here
-    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-tools/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+"\'", shell=True, executable='/bin/bash')
+    subprocess.check_output("sudo su ec2-user -c \'python /tmp/install-tools/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+" "+str(mmaxInstances)+" "+str(region)+"\'", shell=True, executable='/bin/bash')
 
     # update the services.properties file
     node = TAG_VALUE[-1:]
@@ -268,7 +279,7 @@ if __name__ == "__main__":
         # change the app secret to something you want - default is change_me_please
         subprocess.check_output("sudo python /tmp/install-tools/replaceAll.py /tmp/install-tools/kafka-manager-docker-compose.yml \'APPLICATION_SECRET: change_me_please\' \'APPLICATION_SECRET: change_me_please\'", shell=True, executable='/bin/bash')
 
-    # update the /etc/hosts on existing kafka nodes to reflect change on this node
+    # update the /etc/hosts on existing Management nodes to reflect change on this node
     for key in data:
         print('key is: ')
         print(key)
@@ -285,6 +296,6 @@ if __name__ == "__main__":
                 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 client.connect(jsonName, port=22, username='ec2-user', pkey=private_key)
                 s = client.get_transport().open_session()
-                s.exec_command("sudo su ec2-user -c \'python /tmp/install-tools/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+"\'")
+                s.exec_command("sudo su ec2-user -c \'python /tmp/install-tools/update_etc_hosts.py "+str(kmaxInstances)+" "+str(zkmaxInstances)+" "+str(region)+"\'")
             except Exception as e:
                 print(str(e))

@@ -4,6 +4,31 @@
     - vars/vault_vars.yml
     - variables.yml
   tasks:
+    - name: copy account to ../Terraform/modules/vault_ASG/variables.tf
+      lineinfile:
+        dest: ../Terraform/modules/vault_ASG/variables.tf
+        line: "variable \"account\" { default = \"{{ aws_account_id }}\" description = \"AWS account ID\" }"
+        state: present
+    - name: insert AWS access key into run_vault script
+      replace:
+        path: ./roles/vault/files/run-vault/run-vault
+        regexp: '(\<Access key for user allowed to assume role defined in Terraform\>)'
+        replace: '{{ aws_access_key }}'
+    - name: insert AWS secret key into run_vault script
+      replace:
+        path: ./roles/vault/files/run-vault/run-vault
+        regexp: '(\<Secret key for user allowed to assume role defined in Terraform\>)'
+        replace: '{{ aws_secret_key }}'
+    - name: insert .pem file into ./roles/vault/files/install-vault/conf_vault.py
+      replace:
+        path: ./roles/vault/files/install-vault/conf_vault.py
+        regexp: '(\<your.pem\>)'
+        replace: '{{ pem_file }}'
+    - name: move the .pem file ./roles/vault/files/install-vault dir
+      copy:
+        src: '{{ pem_file_location }}/{{ pem_file }}'
+        dest: ./roles/vault/files/install-vault
+        mode: u=r,g=r,o=r
     - name: Run common/tasks/main.yaml
       import_role:
         name: common
@@ -14,6 +39,7 @@
   remote_user: ec2-user
   vars_files:
     - vars/vault_vars.yml
+    - variables.yml
   roles:
     - role: vault
 

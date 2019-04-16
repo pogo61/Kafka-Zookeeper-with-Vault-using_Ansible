@@ -4,6 +4,21 @@
     - vars/kafka_connect_vars.yml
     - variables.yml
   tasks:
+    - name: copy account to ../Terraform/envs/modules/kafka_connect_ASG/variables.tf
+      lineinfile:
+        dest: ../Terraform/modules/kafka_connect_ASG/variables.tf
+        line: "variable \"account\" { default = \"{{ aws_account_id }}\" description = \"AWS account ID\" }"
+        state: present
+    - name: insert .pem file into ./roles/kafka_connect/files/install-kafka_connect/conf_kafka_connect.py
+      replace:
+        path: ./roles/kafka_connect/files/install-kafka_connect/conf_kafka_connect.py
+        regexp: '(\<your .pem file\>)'
+        replace: '{{ pem_file }}'
+    - name: move the .pem file ./roles/kafka_connect/files/install-kafka_connect
+      copy:
+        src: '{{ pem_file_location }}/{{ pem_file }}'
+        dest: ./roles/kafka_connect/files/install-kafka_connect
+        mode: u=r,g=r,o=r
     - name: Run common/tasks/main.yaml
       import_role:
         name: common
@@ -14,6 +29,7 @@
   remote_user: ec2-user
   vars_files:
     - vars/kafka_connect_vars.yml
+    - variables.yml
   roles:
     - role: kafka_connect
 

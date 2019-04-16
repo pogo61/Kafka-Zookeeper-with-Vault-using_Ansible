@@ -19,6 +19,57 @@
   pause: seconds=45
   when: rebooting is changed
 
+- name: setup aws credentials dir for python
+  shell: mkdir ~/.aws
+  args:
+    warn: false # set warn=false to prevent warning
+  become: true
+  become_user: ec2-user
+
+- name: create ~/.aws/config
+  copy:
+    content: ""
+    dest: ~/.aws/config
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
+- name: create ~/.aws/credentials
+  copy:
+    content: ""
+    dest: ~/.aws/credentials
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
+- name: setup aws credentials user for python
+  blockinfile:
+    path: ~/.aws/credentials
+    block: |
+      [paul]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
+      [default]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
+  become: true
+  become_user: ec2-user
+
+- name: setup aws credentials IAM role for python
+  blockinfile:
+    path: ~/.aws/config
+    block: |
+      [default]
+      region={{ region_id }}
+      [profile terraform]
+      role_arn={{ arn_for_terraform_iam_role }}
+      source_profile=paul
+      region={{ region_id }}
+  become: true
+  become_user: ec2-user
+
 - name: install packages
   yum:
     name:

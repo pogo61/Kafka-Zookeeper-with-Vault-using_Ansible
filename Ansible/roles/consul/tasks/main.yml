@@ -1,3 +1,112 @@
 # roles/consul/tasks/main.yml
-- name: build the bastion instance
-  import_tasks: build_consul.yml
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: Check for reboot hint.
+  shell: LAST_KERNEL=$(rpm -q --last kernel | awk 'NR==1{sub(/kernel-/,""); print $1}'); CURRENT_KERNEL=$(uname -r); if [ $LAST_KERNEL != $CURRENT_KERNEL ]; then echo 'reboot'; else echo 'no'; fi
+  ignore_errors: true
+  register: reboot_hint
+
+- name: Rebooting ...
+  command: shutdown -r now "Reboot required for updated kernel"
+  async: 0
+  poll: 0
+  sudo: true
+  ignore_errors: true
+  when: reboot_hint.stdout.find("reboot") != -1
+  register: rebooting
+
+- name: Wait for thing to reboot...
+  pause: seconds=90
+  when: rebooting is changed
+
+- name: setup aws credentials dir for python
+  shell: mkdir ~/.aws
+  args:
+    warn: false # set warn=false to prevent warning
+  become: true
+  become_user: ec2-user
+
+- name: create ~/.aws/config
+  copy:
+    content: ""
+    dest: ~/.aws/config
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
+- name: create ~/.aws/credentials
+  copy:
+    content: ""
+    dest: ~/.aws/credentials
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
+- name: setup aws credentials user for python
+  blockinfile:
+    path: ~/.aws/credentials
+    block: |
+      [paul]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
+      [default]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
+  become: true
+  become_user: ec2-user
+
+- name: setup aws credentials IAM role for python
+  blockinfile:
+    path: ~/.aws/config
+    block: |
+      [default]
+      region={{ region_id }}
+      [profile terraform]
+      role_arn={{ arn_for_terraform_iam_role }}
+      source_profile=paul
+      region={{ region_id }}
+  become: true
+  become_user: ec2-user
+
+- name: install unzip
+  yum:
+    name: "unzip"
+    state: present
+
+- name: install jq
+  become_user: root
+  yum:
+    name: "jq"
+    state: present
+
+- name: install wget
+  yum:
+    name: "wget"
+    state: present
+
+- name: pip install python dependencies
+  pip:
+    name:
+      - "boto3"
+      - "botocore"
+      - "kazoo"
+      - "paramiko"
+    state: present
+
+- name: move the consul installation script to the /tmp dir
+  copy:
+    src: ../files/install-consul
+    dest: /tmp
+    mode: u=rwx,g=rx,o=rx
+
+- name: move the consul installation script to the /tmp dir
+  copy:
+    src: ../files/run-consul
+    dest: /tmp
+    mode: u=rwx,g=rx,o=rx
+
+- name: install consul using the copied bash and python scripts
+  shell: /tmp/install-consul/install-consul --version {{ consul_version }} --user ec2-user

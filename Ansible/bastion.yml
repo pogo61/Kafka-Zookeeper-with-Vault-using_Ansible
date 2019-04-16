@@ -4,16 +4,34 @@
     - vars/bastion_vars.yml
     - variables.yml
   tasks:
+    - name: copy account to ../Terraform/modules/management_bastion/variables.tf
+      lineinfile:
+        dest: ../Terraform/modules/management_bastion/variables.tf
+        line: "variable \"account\" { default = \"{{ aws_account_id }}\" description = \"AWS account ID\" }"
+        state: present
+    - name: copy admin keypair to ../Terraform/envs/modules/management_bastion/variables.tf
+      lineinfile:
+        dest: ../Terraform/modules/management_bastion/variables.tf
+        line: "variable \"admin-key\" { default = \"{{ access_key_pair }}\" description = \"AWS account ID\" }"
+        state: present
+
+- hosts: localhost
+  remote_user: root
+  vars_files:
+    - vars/bastion_vars.yml
+    - variables.yml
+  tasks:
     - name: Run common/tasks/main.yaml
       import_role:
         name: common
     - meta: refresh_inventory
 
-- hosts: bastion_host
+- hosts: Bastion_Host
   become: yes
   remote_user: ec2-user
   vars_files:
     - vars/bastion_vars.yml
+    - variables.yml
   roles:
     - role: bastion
 

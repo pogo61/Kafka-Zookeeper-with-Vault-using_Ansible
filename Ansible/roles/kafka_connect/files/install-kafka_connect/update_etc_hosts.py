@@ -3,9 +3,9 @@ import subprocess
 import boto3
 
 
-def updateHosts(kmaxInstances, zkmaxInstances, kcmaxInstances):
+def updateHosts(kmaxInstances, zkmaxInstances, kcmaxInstances, region):
 
-    session = boto3.Session(profile_name='terraform')
+    session = boto3.Session(profile_name='terraform', region_name=region)
     dynamodb = session.resource('dynamodb')
     kctable = dynamodb.Table('kafka_connect-state')
     ktable = dynamodb.Table('kafka-state')
@@ -101,4 +101,4 @@ if __name__ == "__main__":
     print("This is the name of the script: ", sys.argv[0])
     print("Number of arguments: ", len(sys.argv))
     print("The arguments are: " , str(sys.argv))
-    updateHosts(sys.argv[1],sys.argv[2],sys.argv[3])
+    updateHosts(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4])

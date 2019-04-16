@@ -82,7 +82,7 @@ data "aws_ami" "consul_node" {
 
   filter {
     name   = "name"
-    values = ["consul-RHEL-linux-74*"]
+    values = ["Consul Node"]
   }
 
   filter {
@@ -90,7 +90,7 @@ data "aws_ami" "consul_node" {
     values = ["hvm"]
   }
 
-  owners = ["<your account ID>"] # my account
+  owners = ["${var.account}"] # my account
 }
 
 ### Creating Security Group for consul cluster

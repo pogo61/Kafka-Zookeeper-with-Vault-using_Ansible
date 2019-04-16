@@ -1,0 +1,35 @@
+- hosts: localhost
+  remote_user: root
+  vars_files:
+    - variables.yml
+  tasks:
+    - name: copy account to ../Terraform/envs/test/main.tf
+      replace:
+        path: ../Terraform/envs/test/main.tf
+        regexp: '(\<your account ID\>)'
+        replace: '{{ aws_account_id }}'
+    - name: copy Terraform IAM ARN to ../Terraform/envs/test/main.tf
+      replace:
+        path: ../Terraform/envs/test/main.tf
+        regexp: '(\<ARN for IAM Role predefined to allow Terraform to create everything\>)'
+        replace: '{{ arn_for_terraform_iam_role }}'
+    - name: copy Terraform S3 backet name to ../Terraform/envs/test/main.tf
+      replace:
+        path: ../Terraform/envs/test/main.tf
+        regexp: '(\<name for your state bucket\>)'
+        replace: '{{ s3_state_bucket_name }}'
+    - name: copy Terraform IAM ARN to ../Terraform/envs/test/variables.tf
+      replace:
+        path: ../Terraform/envs/test/variables.tf
+        regexp: '(\<ARN for IAM Role predefined to allow Terraform to create everything\>)'
+        replace: '{{ arn_for_terraform_iam_role }}'
+    - name: copy AWS access_key to  ../Terraform/envs/test/variables.tf
+      replace:
+        path: ../Terraform/envs/test/variables.tf
+        regexp: '(\<aws_access_key\>)'
+        replace: '{{ aws_access_key }}'
+    - name: copy AWS secret_key to  ../Terraform/envs/test/variables.tf
+      replace:
+        path: ../Terraform/envs/test/variables.tf
+        regexp: '(\<aws_secret_key\>)'
+        replace: '{{ aws_secret_key }}'

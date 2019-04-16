@@ -19,6 +19,57 @@
   pause: seconds=45
   when: rebooting is changed
 
+- name: setup aws credentials dir for python
+  shell: mkdir ~/.aws
+  args:
+    warn: false # set warn=false to prevent warning
+  become: true
+  become_user: ec2-user
+
+- name: create ~/.aws/config
+  copy:
+    content: ""
+    dest: ~/.aws/config
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
+- name: create ~/.aws/credentials
+  copy:
+    content: ""
+    dest: ~/.aws/credentials
+    force: no
+    mode: 0666
+  become: true
+  become_user: ec2-user
+
+- name: setup aws credentials user for python
+  blockinfile:
+    path: ~/.aws/credentials
+    block: |
+      [paul]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
+      [default]
+      aws_access_key_id={{ aws_access_key }}
+      aws_secret_access_key={{ aws_secret_key }}
+  become: true
+  become_user: ec2-user
+
+- name: setup aws credentials IAM role for python
+  blockinfile:
+    path: ~/.aws/config
+    block: |
+      [default]
+      region={{ region_id }}
+      [profile terraform]
+      role_arn={{ arn_for_terraform_iam_role }}
+      source_profile=paul
+      region={{ region_id }}
+  become: true
+  become_user: ec2-user
+
 - name: install unzip
   yum:
     name:
@@ -47,13 +98,13 @@
 
 - name: create the ip table for the /etc/hosts copy
   set_fact:
-      hosts:
-        zookeeper1: '0.0.0.0 zookeeper1'
-        zookeeper2: '0.0.0.0 zookeeper2'
-        zookeeper3: '0.0.0.0 zookeeper3'
-        kafka1: '0.0.0.0 kafka1'
-        kafka2: '0.0.0.0 kafka2'
-        kafka3: '0.0.0.0 kafka3'
+    hosts:
+      zookeeper1: '0.0.0.0 zookeeper1'
+      zookeeper2: '0.0.0.0 zookeeper2'
+      zookeeper3: '0.0.0.0 zookeeper3'
+      kafka1: '0.0.0.0 kafka1'
+      kafka2: '0.0.0.0 kafka2'
+      kafka3: '0.0.0.0 kafka3'
 
 - name: Print the ip table names to the console.
   debug: var=hosts

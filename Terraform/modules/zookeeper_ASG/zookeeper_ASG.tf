@@ -32,7 +32,7 @@ data "aws_ami" "zookeeper_node" {
 
   filter {
     name   = "name"
-    values = ["zookeeper-RHEL-linux-74*"]
+    values = ["Zookeeper Node"]
   }
 
   filter {
@@ -40,7 +40,7 @@ data "aws_ami" "zookeeper_node" {
     values = ["hvm"]
   }
 
-  owners = ["<your account ID>"] # my account
+  owners = ["${var.account}"] # my account
 }
 
 resource "aws_launch_configuration" "zookeeper_ASG_launch" {

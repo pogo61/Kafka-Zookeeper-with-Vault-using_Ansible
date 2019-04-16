@@ -68,7 +68,7 @@ def getAWSValues():
             print("there is still no value for the instance tag, so assuming it is zookeeper")
             tagvalue = 'zookeeper'
 
-    session = boto3.Session(profile_name='terraform')
+    #session = boto3.Session(profile_name='terraform')
 
     # get the ASG details for kafka and zookeeper
     asg = boto3.client('autoscaling')
@@ -192,10 +192,6 @@ def changeTagName(tag, ip, state, list, maxinstances, region):
 
 if __name__ == "__main__":
 
-    # initialise needed variables
-    session = boto3.Session(profile_name='terraform')
-    client = session.client('dynamodb')
-    tablename = 'zookeeper-state'
 
     # get the AWS values needed to lookup the relevant state and ASG data
     valueList = getAWSValues()
@@ -205,6 +201,11 @@ if __name__ == "__main__":
     zkmaxInstances = valueList[3]
     instanceList = valueList[4]
     region = valueList[5]
+
+    # initialise needed variables
+    session = boto3.Session(profile_name='terraform', region_name=region)
+    client = session.client('dynamodb')
+    tablename = 'zookeeper-state'
 
     # get the current details from the DynamoDB table
     data = getStateFile(client, zkmaxInstances, TAG_VALUE, tablename)

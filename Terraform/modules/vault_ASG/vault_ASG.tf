@@ -19,7 +19,7 @@ data "aws_ami" "vault_node" {
 
   filter {
     name   = "name"
-    values = ["vault-RHEL-linux-74*"]
+    values = ["Vault Node"]
   }
 
   filter {
@@ -27,7 +27,7 @@ data "aws_ami" "vault_node" {
     values = ["hvm"]
   }
 
-  owners = ["<your account ID>"] # my account
+  owners = ["${var.account}"] # my account
 }
 
 resource "aws_launch_configuration" "vault_ASG_launch" {

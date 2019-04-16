@@ -3,10 +3,40 @@ import boto3
 import botocore
 import subprocess
 import sys
+from six.moves import urllib
+
+def getAWSValues():
+    # Get the instances IP address
+    localip = urllib.request.urlopen('http://169.254.169.254/latest/meta-data/local-ipv4').read()
+    localip = localip.strip()
+    print("instance IP is: "+localip)
+
+    # Get the Instance Name tag value
+    instanceid=subprocess.check_output("curl http://169.254.169.254/latest/meta-data/instance-id; echo",shell=True)
+    instanceid = instanceid.strip()
+    print("instance ID is: "+instanceid)
+
+    # Get the region instanc eis in
+    region = subprocess.check_output("curl -s3 http://169.254.169.254/latest/dynamic/instance-identity/document | grep region | awk -F: \'{print $2}\'; echo",shell=True)
+    #print("region is: "+REGION)
+    region = region.replace('"', '')
+    region = region.replace(',', '')
+    region = region.strip()
+    print("region is: "+region)
+
+
+    return [localip, instanceid, region]
 
 def updateHosts(zkmaxInstances):
 
-    session = boto3.Session(profile_name='terraform')
+    # get the AWS values needed to lookup the relevant state and ASG data
+    valueList = getAWSValues()
+    LOCAL_IP = valueList[0]
+    INSTANCE_ID = valueList[1]
+    region = valueList[2]
+
+    # initialise needed variables
+    session = boto3.Session(profile_name='terraform', region_name=region)
     dynamodb = session.resource('dynamodb')
     table = dynamodb.Table('zookeeper-state')
 
