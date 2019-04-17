@@ -55,6 +55,54 @@ instances to utilise the Consul cluster, as the consul client agents just don't 
 - AWS CLI installed
 
 ### Getting Started Instructions
+#### Set up the terraform IAM Role
+- go to IAM and select the roles menu option
+- click the "Create Role" button
+- click the permissions tab, if not there already and click on "Add inline policy" to the right
+- click on the JSON tab and past teh folowing:
+`{
+     "Version": "2012-10-17",
+     "Statement": [
+         {
+             "Effect": "Allow",
+             "Action": [
+                 "*"
+             ],
+             "Resource": "*"
+         }
+     ]
+ }`
+- click review policy, then save
+- copy the valie of the "Role ARN" variable for next step, and the Ansible variable file
+#### Set up the S3 bucket for the terraform state file
+- go to S3 and create a new bucket. Accept the defaults
+- in the permissions tab of the bucket, click on the bucket policy button
+- in the policy editor paste update and past the following policy:
+`{
+     "Version": "2012-10-17",
+     "Statement": [
+         {
+             "Effect": "Allow",
+             "Principal": {
+                 "AWS": "the IAM role you created for this environment"
+             },
+             "Action": "s3:ListBucket",
+             "Resource": "arn:aws:s3:::name-of-the-bucket"
+         },
+         {
+             "Effect": "Allow",
+             "Principal": {
+                 "AWS": "the IAM role you created for this environment"
+             },
+             "Action": [
+                 "s3:GetObject",
+                 "s3:PutObject"
+             ],
+             "Resource": "arn:aws:s3:::name-of-the-bucket/*"
+         }
+     ]
+ }`
+
 #### Populate your Ansible variable file, and encript it with Ansible-Vault
 - create a vault password file somewhere safe and make it hidden... perhaps ~/.vaultpass.txt and put the password in there that you'll use for vault
 - The create a file in the Ansible directory called variables.yml using the command 'ansible-vault edit variables.yml --vault-password-file ~/.vault_pass.txt', to look like:
@@ -89,7 +137,7 @@ go to the Ansible Directory and run all the playbooks with this command
 - Consul requires harcoded AWS keys in run-consul, this needs fixing
 
 ### License
-Copyright [2017] [Paul Pogonoski]
+Copyright [2019] [Paul Pogonoski]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
