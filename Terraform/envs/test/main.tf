@@ -126,6 +126,11 @@ module "management_vpc" {
   source              = "../../modules/management_vpc"
   man_vpc_cidr_block  = "${var.man_vpc_cidr_block}"
   availability_zones_names  = "${data.aws_availability_zones.available.names}"
+  /*
+  ** wait until Kafka ASG and Zookeeper ASG creation is finished
+  */
+  kready              = "${module.kafka_ASG.kafka_ready}"
+  zkready             = "${module.zookeeper_ASG.zookeeper_ready}"
 }
 
 module "management_ASG" {

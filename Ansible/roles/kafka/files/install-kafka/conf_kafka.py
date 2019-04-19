@@ -193,35 +193,6 @@ def changeTagName(tag, ip, state, list, maxinstances, region):
     print (state)
 
     return [tag, state]
-# def getS3StateFile(s3, maxinstances, bucket, file, path):
-#
-#     #initialise the default json file
-#     state = {
-#         'changed'    : '',
-#         'nodes'      : 0
-#     }
-#     index = 0
-#     while index < maxinstances:
-#         index += 1
-#         state['kafka'+str(index)] = '0.0.0.0'
-#
-#     print ('the default json data is: '+str(state))
-#
-#     # Get file from S3 bucket
-#     try:
-#         s3.Bucket(bucket).download_file(filename, path+file)
-#     except botocore.exceptions.ClientError as e:
-#         if e.response['Error']['Code'] == "404":
-#             print("The object does not exist, so creating it")
-#             json.dump(state, open(path+file,'w'))
-#         else:
-#             raise
-#
-#     #Read JSON data into the datastore variable
-#     state = json.load(open(path+file,'r'))
-#     print (state)
-#
-#     return state
 
 
 if __name__ == "__main__":
