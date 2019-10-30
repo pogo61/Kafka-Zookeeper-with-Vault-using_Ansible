@@ -8,3 +8,6 @@
 /Users/paulpog/Documents/GitHub/Kafka-Zookeeper-with-Vault-using_Ansible/_mac
 /Users/paulpog/Documents/GitHub/Kafka-Zookeeper-with-Vault-using_Ansible/.idea
 *.retry
+/_mac/
+/codestyles/
+/venv/
